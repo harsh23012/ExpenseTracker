@@ -40,7 +40,7 @@ public class GroupStatelessBean implements GroupStatelessBeanRemote {
 		List<TripGroup> groups = new ArrayList<TripGroup>();
 		groups = entityManager.createQuery("SELECT t from TripGroup t WHERE t.user.id = :adminId", TripGroup.class)
 				.setParameter("adminId", adminId).getResultList();
-		
+		System.out.println(groups);
 		return groups;
 	}
 
