@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.java.ejb.model">
+
+    <class name="User" table="users">
+
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+
+        <property name="name" type="string">
+            <column name="name" not-null="true" length="100" />
+        </property>
+
+        <property name="email" type="string">
+            <column name="email" not-null="true" unique="true" length="100" />
+        </property>
+
+        <property name="user_name" type="string">
+            <column name="user_name" not-null="true" unique="true" length="30" />
+        </property>
+
+        <property name="phone" type="string">
+            <column name="phone" not-null="true" unique="true" length="15" />
+        </property>
+
+        <property name="balance" type="double">
+            <column name="balance" not-null="true" />
+        </property>
+
+        <property name="user_type">
+            <column name="user_type" not-null="true" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.java.ejb.model.UserType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <property name="created_at" type="timestamp">
+            <column name="created_at" />
+        </property>
+
+        <property name="updated_at" type="timestamp">
+            <column name="updated_at" />
+        </property>
+        
+        <property name="password" type="string">
+            <column name="password" not-null="true" />
+        </property>
+
+    </class>
+
+    <query name="findAllUsers">
+        from User
+    </query>
+
+    <query name="findUserById">
+        from User where id = :id
+    </query>
+
+</hibernate-mapping>

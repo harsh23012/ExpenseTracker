@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.java.ejb.model">
+
+    <class name="Expense" table="expense">
+
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <many-to-one name="tripGroup" class="com.java.ejb.model.TripGroup" column="group_id" not-null="true"/>
+
+        <many-to-one name="user" class="com.java.ejb.model.User" column="paid_by_user_id" not-null="true"/>
+
+        <property name="description" type="string">
+            <column name="description" not-null="true" length="255"/>
+        </property>
+
+        <property name="category" type="string">
+            <column name="category" length="50"/>
+        </property>
+
+        <property name="total_amount" type="double">
+            <column name="total_amount" not-null="true"/>
+        </property>
+
+        <property name="expense_date" type="date">
+            <column name="expense_date" not-null="true"/>
+        </property>
+
+        <property name="created_at" type="timestamp">
+            <column name="created_at"/>
+        </property>
+
+        <property name="updated_at" type="timestamp">
+            <column name="updated_at"/>
+        </property>
+
+    </class>
+
+    <query name="findAllExpenses">
+        from Expense
+    </query>
+
+</hibernate-mapping>

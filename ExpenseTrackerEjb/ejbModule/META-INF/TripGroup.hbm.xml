@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.java.ejb.model">
+
+    <class name="TripGroup" table="trip_group">
+
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+
+        <property name="name" type="string">
+            <column name="name" not-null="true" length="100" />
+        </property>
+
+        <property name="description" type="string">
+            <column name="description" sql-type="TEXT" />
+        </property>
+
+        <many-to-one name="user" class="com.java.ejb.model.User" column="created_by" not-null="false" />
+
+        <property name="created_at" type="timestamp">
+            <column name="created_at" />
+        </property>
+
+        <property name="updated_at" type="timestamp">
+            <column name="updated_at" />
+        </property>
+
+    </class>
+
+    <!-- Optional query -->
+    <query name="findAllTripGroups">
+        from TripGroup
+    </query>
+
+</hibernate-mapping>

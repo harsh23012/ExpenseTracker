@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.java.ejb.model">
+
+    <class name="GroupMembers" table="group_members">
+
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <many-to-one name="tripGroup" class="com.java.ejb.model.TripGroup" column="group_id" not-null="true"/>
+
+        <many-to-one name="user" class="com.java.ejb.model.User" column="user_id" not-null="true"/>
+
+        <property name="role">
+            <column name="role"/>
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.java.ejb.model.Role</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <property name="joined_at" type="timestamp">
+            <column name="joined_at"/>
+        </property>
+
+    </class>
+
+    <query name="findAllGroupMembers">
+        from GroupMembers
+    </query>
+
+</hibernate-mapping>
